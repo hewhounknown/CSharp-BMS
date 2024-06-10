@@ -49,4 +49,17 @@ internal class AccountQuery
                                                           JOIN [dbo].[Tbl_Customer] Customer
                                                           ON Account.CustomerNo = Customer.CustomerNo
                                                           WHERE Account.CustomerNo = @CustomerNo";
+
+    public static string UpdateBalanceQuery { get; } = @"UPDATE [dbo].[Tbl_Account]
+                                                   SET [Balance] = @Balance
+                                                 WHERE AccountNo = @AccountNo AND Password = @Password";
+
+    public static string SelectQueryByNo { get; } = @"SELECT [AccountId]
+                                              ,[AccountNo]
+                                              ,[CustomerNo]
+                                              ,[AccountType]
+                                              ,[Balance]
+                                              ,[Password]
+                                          FROM [dbo].[Tbl_Account]
+                                          WHERE AccountNo = @AccountNo";
 }

@@ -42,4 +42,12 @@ public class AccountService
     {
         return _accountRepo.DeleteAccount(id);
     }
+
+    public AccountDTO GetAccountByNo(string  no)
+    {
+        AccountEntity account = _accountRepo.GetAccountByNo(no);
+        if (account == null) return null;
+
+        return account.ToDTO();
+    }
 }

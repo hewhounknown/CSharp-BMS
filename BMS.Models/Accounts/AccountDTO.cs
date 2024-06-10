@@ -8,9 +8,4 @@ public class AccountDTO
     public string AccountType { get; set; }
     public decimal Balance { get; set; }
     public string Password { get; set; }
-
-    public AccountEntity ToEntity()
-    {
-        throw new NotImplementedException();
-    }
 }

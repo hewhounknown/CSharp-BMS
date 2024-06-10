@@ -44,4 +44,10 @@ public class AccountRepository
         int result = _dapper.Execute<AccountEntity>(AccountQuery.DeleteQuery, new { AccountId = id });
         return result;
     }
+
+    public AccountEntity GetAccountByNo(string no)
+    {
+        AccountEntity account = _dapper.QueryFirstOrDefault<AccountEntity>(AccountQuery.SelectQueryByNo, new { AccountNo = no });
+        return account;
+    }
 }

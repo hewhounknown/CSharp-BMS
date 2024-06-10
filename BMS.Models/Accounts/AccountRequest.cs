@@ -2,7 +2,7 @@
 
 namespace BMS.Models.Accounts;
 
-public record AccountRequest(string cuetomerNo, EnumAccountType accountType, decimal balance, string password)
+public record AccountRequest(string customerNo, EnumAccountType accountType, decimal balance, string password)
 {
     public bool IsStrongPassword()
     {
@@ -22,12 +22,11 @@ public record AccountRequest(string cuetomerNo, EnumAccountType accountType, dec
     {
         return new AccountDTO
         {
-            CustomerNo = cuetomerNo,
+            CustomerNo = customerNo,
             Balance = balance,
             Password = password,
             AccountNo = GenerateCode(accTypeString),
             AccountType = accTypeString,
-
         };
     }
 
@@ -49,13 +48,3 @@ public enum EnumAccountType
     Saving,
     Checking
 }
-
-//public class AccountRequestDTO
-//{
-//    public string CustomerNo { get; set; }
-
-//    //[JsonConverter(typeof(JsonStringEnumConverter))] // to display enum as string in API
-//    public EnumAccountType AccountType { get; set; }
-//    public decimal Balance { get; set; }
-//    public string Password { get; set; }
-//}
