@@ -62,4 +62,8 @@ internal class AccountQuery
                                               ,[Password]
                                           FROM [dbo].[Tbl_Account]
                                           WHERE AccountNo = @AccountNo";
+
+    public static string ReceiveAmountQuery { get; } = @"UPDATE [dbo].[Tbl_Account]
+                                                   SET [Balance] = @Balance
+                                                 WHERE AccountNo = @AccountNo";
 }

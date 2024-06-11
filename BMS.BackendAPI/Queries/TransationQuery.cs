@@ -6,29 +6,29 @@ internal class TransationQuery
                                            ([TransationDate]
                                            ,[Amount]
                                            ,[TransationType]
-                                           ,[SenderNo]
-                                           ,[ReceiverNo])
+                                           ,[ReceiverNo]
+                                           ,[AccountNo])
                                      VALUES
                                            (@TransationDate
                                            ,@Amount
                                            ,@TransationType
-                                           ,@SenderNo
-                                           ,@ReceiverNo)";
+                                           ,@ReceiverNo
+                                           ,@AccountNo)";
 
     public static string SelectAllQuery { get; } = @"SELECT [TransationId]
                                               ,[TransationDate]
                                               ,[Amount]
                                               ,[TransationType]
-                                              ,[SenderNo]
                                               ,[ReceiverNo]
+                                              ,[AccountNo]
                                           FROM [dbo].[Tbl_Transation]";
 
     public static string SelectQuery { get; } = @"SELECT [TransationId]
                                               ,[TransationDate]
                                               ,[Amount]
                                               ,[TransationType]
-                                              ,[SenderNo]
                                               ,[ReceiverNo]
+                                              ,[AccountNo]
                                           FROM [dbo].[Tbl_Transation]
                                           WHERE TransationId = @TransationId";
 }

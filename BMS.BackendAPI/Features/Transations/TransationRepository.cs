@@ -23,20 +23,30 @@ public class TransationRepository
             (
             AccountQuery.UpdateBalanceQuery, new
             {
-                Balance = balance, 
+                Balance = balance,
                 AccountNo = accountNo,
                 Password = password
             }
             );
         if (updateResult == 0) return 0;
 
-        int result = _dapper.Execute<TransationEntity>(TransationQuery.InsertQuery, transation);
-        return result;
+        int transationResult = _dapper.Execute<TransationEntity>(TransationQuery.InsertQuery, transation);
+
+        return transationResult;
     }
 
     public List<TransationEntity> GetAllTransations()
     {
         List<TransationEntity> transations = _dapper.Query<TransationEntity>(TransationQuery.SelectAllQuery);
         return transations;
+    }
+
+    public int UpdateReceiverAccount(string accountNo, decimal amount)
+    {
+        return _dapper.Execute<AccountEntity>(AccountQuery.ReceiveAmountQuery, new
+        {
+            AccountNo = accountNo,
+            Balance = amount
+        });
     }
 }

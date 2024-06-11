@@ -18,8 +18,15 @@ namespace BMS.BackendAPI.Features.Transations
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<TransationDTO> transations = _transationService.GetAllTransations();
-            return Ok(transations);
+            try
+            {
+                List<TransationDTO> transations = _transationService.GetAllTransations();
+                return Ok(transations);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]

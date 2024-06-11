@@ -1,6 +1,6 @@
 ﻿namespace BMS.Models.Transations;
 
-public record TransationRequest(decimal amount, EnumTransationType type, string? senderNo, string receiverNo, string password)
+public record TransationRequest(decimal amount, EnumTransationType type, string? receiverNo, string accountNo, string password)
 {
     public TransationDTO ToDTO()
     {
@@ -9,8 +9,8 @@ public record TransationRequest(decimal amount, EnumTransationType type, string?
             TransationDate = dateTime,
             Amount = amount,
             TransationType = transationTypeString,
-            SenderNo = senderNo ?? null,
-            ReceiverNo = receiverNo
+            ReceiverNo = receiverNo ?? null,
+            AccountNo = accountNo
         };
     }
 

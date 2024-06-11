@@ -11,8 +11,8 @@ public static class TransationMapper
             TransationDate = transation.TransationDate,
             Amount = transation.Amount,
             TransationType = transation.TransationType,
-            SenderNo = transation.SenderNo,
             ReceiverNo = transation.ReceiverNo,
+            AccountNo = transation.AccountNo,
         };
     }
 
@@ -23,8 +23,8 @@ public static class TransationMapper
             TransationDate = dto.TransationDate,
             Amount = dto.Amount,
             TransationType = dto.TransationType,
-            SenderNo = dto.SenderNo,
             ReceiverNo = dto.ReceiverNo,
+            AccountNo = dto.AccountNo,
         };
     }
 }
