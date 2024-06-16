@@ -41,7 +41,6 @@ namespace BMS.BackendAPI.Features.Transations
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }

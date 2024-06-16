@@ -18,17 +18,33 @@ public class AccountController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        List<AccountDTO> accounts = _accountService.GetAccounts();
-        return Ok(accounts);
+        try
+        {
+            List<AccountDTO> accounts = _accountService.GetAccounts();
+            return Ok(accounts);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        AccountDTO account = FindAccount(id);
-        if (account == null) return NotFound("no ACC found");
+        try
+        {
+            AccountDTO account = FindAccount(id);
+            if (account == null) return NotFound("no ACC found");
 
-        return Ok(account);
+            return Ok(account);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
@@ -79,10 +95,18 @@ public class AccountController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        int result = _accountService.DeleteAccount(id);
+        try
+        {
+            int result = _accountService.DeleteAccount(id);
 
-        string msg = result > 0 ? "deleted success" : "failed";
-        return Ok(msg);
+            string msg = result > 0 ? "deleted success" : "failed";
+            return Ok(msg);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     private AccountDTO FindAccount(int id)

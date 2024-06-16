@@ -2,7 +2,6 @@
 using BMS.Models.Customers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BMS.Mappings;
 
 namespace BMS.WebAPI.Features.Customers;
 
@@ -20,17 +19,33 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        List<CustomerDTO> customers = _customerService.GetCustomers();
-        return Ok(customers);
+        try
+        {
+            List<CustomerDTO> customers = _customerService.GetCustomers();
+            return Ok(customers);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        CustomerDTO customer = FindCustomer(id);
-        if (customer == null) return NotFound("no customer found");
+        try
+        {
+            CustomerDTO customer = FindCustomer(id);
+            if (customer == null) return NotFound("no customer found");
 
-        return Ok(customer);
+            return Ok(customer);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
@@ -76,13 +91,21 @@ public class CustomerController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        CustomerDTO customer = FindCustomer(id);
-        if (customer == null) return NotFound("no customer found");
+        try
+        {
+            CustomerDTO customer = FindCustomer(id);
+            if (customer == null) return NotFound("no customer found");
 
-        int result = _customerService.DeleteCustomer(id);
+            int result = _customerService.DeleteCustomer(id);
 
-        string msg = result > 0 ? "deleted success" : "failed";
-        return Ok(msg);
+            string msg = result > 0 ? "deleted success" : "failed";
+            return Ok(msg);
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet("WithAccs/{customerNo}")]
