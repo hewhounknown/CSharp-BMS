@@ -11,9 +11,9 @@ public class CustomerRepository
 {
     private readonly DapperService _dapper;
 
-    public CustomerRepository()
+    public CustomerRepository(DapperService dapper)
     {
-        _dapper = new DapperService(DBConnection.ConnectionBuilder.ConnectionString);
+        _dapper = dapper;
     }
 
     public int CreateCustomer(CustomerEntity customer)

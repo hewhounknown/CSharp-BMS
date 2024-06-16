@@ -1,7 +1,7 @@
-﻿using BMS.Mappings;
+﻿using BMS.BackendAPI.Features.Accounts;
+using BMS.Mappings;
 using BMS.Models.Accounts;
 using BMS.Models.Transations;
-using BMS.WebAPI.Features.Accounts;
 
 namespace BMS.BackendAPI.Features.Transations;
 
@@ -10,11 +10,13 @@ public class TransationService
     private readonly TransationRepository _transationRepo;
     private readonly AccountService _accService;
 
-    public TransationService()
+    public TransationService(TransationRepository transationRepo, AccountService accService)
     {
-        _transationRepo = new TransationRepository();
-        _accService = new AccountService();
+        _transationRepo = transationRepo;
+        _accService = accService;
     }
+
+    
 
     public int AddTransation(TransationRequest transationRequest)
     {

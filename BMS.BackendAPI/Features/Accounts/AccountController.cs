@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BMS.WebAPI.Features.Accounts;
+namespace BMS.BackendAPI.Features.Accounts;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -10,9 +10,9 @@ public class AccountController : ControllerBase
 {
     private readonly AccountService _accountService;
 
-    public AccountController()
+    public AccountController(AccountService accountService)
     {
-        _accountService = new AccountService();
+        _accountService = accountService;
     }
 
     [HttpGet]

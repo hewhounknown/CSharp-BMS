@@ -10,9 +10,9 @@ namespace BMS.BackendAPI.Features.Transations
     {
         private readonly TransationService _transationService;
 
-        public TransationController()
+        public TransationController(TransationService transationService)
         {
-            _transationService = new TransationService();
+            _transationService = transationService;
         }
 
         [HttpGet]

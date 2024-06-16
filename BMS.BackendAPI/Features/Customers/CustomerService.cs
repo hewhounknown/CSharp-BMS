@@ -8,9 +8,9 @@ public class CustomerService
 {
     private readonly CustomerRepository _customerRepo;
 
-    public CustomerService()
+    public CustomerService(CustomerRepository customerRepo)
     {
-        _customerRepo = new CustomerRepository();
+        _customerRepo = customerRepo;
     }
 
     public int CreateCustomer(CustomerDTO dto)

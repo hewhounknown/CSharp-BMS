@@ -11,9 +11,9 @@ public class TransationRepository
 {
     private readonly DapperService _dapper;
 
-    public TransationRepository()
+    public TransationRepository(DapperService dapper)
     {
-        _dapper = new DapperService(DBConnection.ConnectionBuilder.ConnectionString);
+        _dapper = dapper;
     }
 
     public int AddTransation(TransationEntity transation, decimal balance, string accountNo, string password)

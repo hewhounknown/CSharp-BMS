@@ -9,9 +9,9 @@ public class AccountRepository
 {
     private readonly DapperService _dapper;
 
-    public AccountRepository()
+    public AccountRepository(DapperService dapper)
     {
-        _dapper = new DapperService(DBConnection.ConnectionBuilder.ConnectionString);
+        _dapper = dapper;
     }
 
     public int CreateAccount(AccountEntity account)

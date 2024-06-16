@@ -1,16 +1,15 @@
-﻿using BMS.BackendAPI.Features.Accounts;
-using BMS.Models.Accounts;
+﻿using BMS.Models.Accounts;
 using BMS.Mappings;
 
-namespace BMS.WebAPI.Features.Accounts;
+namespace BMS.BackendAPI.Features.Accounts;
 
 public class AccountService
 {
     private readonly AccountRepository _accountRepo;
 
-    public AccountService()
+    public AccountService(AccountRepository accountRepo)
     {
-        _accountRepo = new AccountRepository();
+        _accountRepo = accountRepo;
     }
 
     public int CreateAccount(AccountDTO dto)
@@ -43,7 +42,7 @@ public class AccountService
         return _accountRepo.DeleteAccount(id);
     }
 
-    public AccountDTO GetAccountByNo(string  no)
+    public AccountDTO GetAccountByNo(string no)
     {
         AccountEntity account = _accountRepo.GetAccountByNo(no);
         if (account == null) return null;

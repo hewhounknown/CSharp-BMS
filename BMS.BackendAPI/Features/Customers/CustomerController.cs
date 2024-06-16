@@ -12,9 +12,9 @@ public class CustomerController : ControllerBase
 {
     private readonly CustomerService _customerService;
 
-    public CustomerController()
+    public CustomerController(CustomerService customerService)
     {
-        _customerService = new CustomerService();
+        _customerService = customerService;
     }
 
     [HttpGet]
