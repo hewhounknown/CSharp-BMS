@@ -31,4 +31,13 @@ internal class TransationQuery
                                               ,[AccountNo]
                                           FROM [dbo].[Tbl_Transation]
                                           WHERE TransationId = @TransationId";
+
+    public static string SelectQueryByAccNo { get; } = @"SELECT [TransationId]
+                                                  ,[TransationDate]
+                                                  ,[Amount]
+                                                  ,[TransationType]
+                                                  ,[ReceiverNo]
+                                                  ,[AccountNo]
+                                              FROM [dbo].[Tbl_Transation]
+                                              WHERE AccountNo = @AccNo OR ReceiverNo = @AccNo";
 }

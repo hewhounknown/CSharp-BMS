@@ -2,6 +2,7 @@
 using BMS.Mappings;
 using BMS.Models.Accounts;
 using BMS.Models.Transations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BMS.BackendAPI.Features.Transations;
 
@@ -15,8 +16,6 @@ public class TransationService
         _transationRepo = transationRepo;
         _accService = accService;
     }
-
-    
 
     public int AddTransation(TransationRequest transationRequest)
     {
@@ -35,11 +34,15 @@ public class TransationService
         switch (transationRequest.type)
         {
             case EnumTransationType.Deposite:
+                if (!string.IsNullOrEmpty(dto.ReceiverNo)) dto.ReceiverNo = null;
+
                 amount = accountDTO.Balance + dto.Amount;
                 result = _transationRepo.AddTransation(dto.ToEntity(), amount, accountNo, password);
                 break;
             case EnumTransationType.Withdrawal:
                 if (dto.Amount > accountDTO.Balance) throw new InvalidOperationException("Not enought balance for withdrawal.");
+
+                if (!string.IsNullOrEmpty(dto.ReceiverNo)) dto.ReceiverNo = null;
 
                 amount = accountDTO.Balance - dto.Amount;
                 result = _transationRepo.AddTransation(dto.ToEntity(), amount, accountNo, password);
@@ -73,5 +76,17 @@ public class TransationService
     {
         List<TransationEntity> transations = _transationRepo.GetAllTransations();
         return transations.Select(x => x.ToDTO()).ToList();
+    }
+
+    public TransationDTO GetTransation(int id)
+    {
+        TransationEntity transation = _transationRepo.GetTransation(id);
+        return transation.ToDTO();
+    }
+
+    public List<TransationEntity> GetTransationsByAccNo(string accNo)
+    {
+        List<TransationEntity> transations = _transationRepo.GetTransationsByAccNo(accNo);
+        return transations;
     }
 }

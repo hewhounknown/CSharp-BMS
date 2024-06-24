@@ -35,12 +35,6 @@ public class TransationRepository
         return transationResult;
     }
 
-    public List<TransationEntity> GetAllTransations()
-    {
-        List<TransationEntity> transations = _dapper.Query<TransationEntity>(TransationQuery.SelectAllQuery);
-        return transations;
-    }
-
     public int UpdateReceiverAccount(string accountNo, decimal amount)
     {
         return _dapper.Execute<AccountEntity>(AccountQuery.ReceiveAmountQuery, new
@@ -48,5 +42,24 @@ public class TransationRepository
             AccountNo = accountNo,
             Balance = amount
         });
+    }
+    public List<TransationEntity> GetAllTransations()
+    {
+        List<TransationEntity> transations = _dapper.Query<TransationEntity>(TransationQuery.SelectAllQuery);
+        return transations;
+    }
+
+    public TransationEntity GetTransation(int id)
+    {
+        TransationEntity transation = _dapper.QueryFirstOrDefault<TransationEntity>(TransationQuery.SelectQuery, new
+        { TransationId = id });
+        return transation;
+    }
+
+    public List<TransationEntity> GetTransationsByAccNo (string accNo)
+    {
+        List<TransationEntity> transations = _dapper.Query<TransationEntity>(TransationQuery.SelectQueryByAccNo, new
+        { AccNo = accNo });
+        return transations;
     }
 }

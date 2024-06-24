@@ -44,5 +44,34 @@ namespace BMS.BackendAPI.Features.Transations
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id) 
+        {
+            try
+            {
+                TransationDTO transation = _transationService.GetTransation(id);
+                return Ok(transation);  
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ByAccNo/{accNo}")]
+        public IActionResult GetByAccNo(string accNo)
+        {
+            try
+            {
+                List<TransationEntity> transations = _transationService.GetTransationsByAccNo(accNo);
+                return Ok(transations);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
